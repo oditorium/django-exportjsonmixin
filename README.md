@@ -8,7 +8,33 @@ might work, albeit not Python 2.
 
 ## Usage
 
-_to come_
+### Direct
+
+Export the whole table
+
+    class MyModel(models.Model)
+        ...
+        
+    json = json_export(MyModel)
+    
+Export a subset
+
+    json = json_export( MyModel, MyModel.objects.filter(some_field=100) )
+
+### As mixin
+
+Export the whole table
+
+    class MyModel(ExportJsonMixin, models.Model)
+        ...
+        
+    json = MyModel.json_export()
+    
+Export a subset
+
+    json = MyModel.json_export( MyModel.objects.filter(some_field=100) )
+
+
 
 ## Contributions
 Contributions welcome. Send us a pull request!
@@ -17,4 +43,5 @@ Contributions welcome. Send us a pull request!
 The idea is to use [semantic versioning](http://semver.org/), even though initially we might make some minor
 API changes without bumping the major version number. Be warned!
 
+- **v2.0** separate the json export code into a separate function that can be be used without need for a mixin
 - **v1.0** initial version 
