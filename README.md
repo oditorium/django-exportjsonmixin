@@ -15,11 +15,15 @@ Export the whole table
     class MyModel(models.Model)
         ...
         
+    data = data_export(MyModel)
     json = json_export(MyModel)
+    tsv  = tsv_export(MyModel)
     
 Export a subset
 
     json = json_export( MyModel, MyModel.objects.filter(some_field=100) )
+    ...
+
 
 ### As mixin
 
@@ -28,12 +32,14 @@ Export the whole table
     class MyModel(ExportJsonMixin, models.Model)
         ...
         
+    data = MyModel.data_export()
     json = MyModel.json_export()
-    
+    tsv  = MyModel.tsv_export()
+
 Export a subset
 
     json = MyModel.json_export( MyModel.objects.filter(some_field=100) )
-
+    ...
 
 
 ## Contributions
@@ -43,5 +49,6 @@ Contributions welcome. Send us a pull request!
 The idea is to use [semantic versioning](http://semver.org/), even though initially we might make some minor
 API changes without bumping the major version number. Be warned!
 
+- **v2.1** separate the data export code; `data_export`, `tsv_export`
 - **v2.0** separate the json export code into a separate function that can be be used without need for a mixin
 - **v1.0** initial version 
